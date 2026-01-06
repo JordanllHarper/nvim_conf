@@ -1,0 +1,3 @@
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QNvim Setup\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QBased on Kickstart.nvim\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_GB","sentence":"^\\QThe code starts in init\\E$"}
