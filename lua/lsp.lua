@@ -1,13 +1,13 @@
-local cmd             = require("utils").custom_buf_user_command
-local batchMap        = require('utils').batch_map
-local ts              = require("telescope.builtin")
+local cmd       = require("utils").custom_buf_user_command
+local batchMap  = require('utils').batch_map
+local ts        = require("telescope.builtin")
 
-local set             = vim.keymap.set
-local del             = vim.keymap.del
+local set       = vim.keymap.set
+local del       = vim.keymap.del
 
-local M               = {}
+local M         = {}
 
-M.setup_servers       = function()
+M.setup_servers = function()
 	vim.diagnostic.config({
 		severity_sort = true,
 	})
@@ -100,7 +100,7 @@ local function configure_lsp(bufnr)
 		{ "k",  function() lspbuf.signature_help { border = "single" } end, "Signature [H]elp" },
 		{ "rn", lspbuf.rename,                                              "[r]e[n]ame" },
 		-- Code actions
-		-- { "c",  actions_preview.code_actions,                               "[c]ode action" },
+		{ "c",  lspbuf.code_action,                                         "[c]ode action" },
 		-- Hints
 		{ "Lt", "<Cmd>ToggleHints<CR>",                                     "[T]oggle hints" },
 	}

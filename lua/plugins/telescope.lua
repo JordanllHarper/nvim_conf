@@ -5,6 +5,7 @@ return {
 			'nvim-lua/plenary.nvim',
 			'nvim-telescope/telescope-fzf-native.nvim',
 			"debugloop/telescope-undo.nvim",
+			'nvim-telescope/telescope-ui-select.nvim',
 		},
 		config = function()
 			local themes = require 'telescope.themes'
@@ -56,6 +57,9 @@ return {
 					},
 				},
 				extensions = {
+					["ui-select"] = {
+						require("telescope.themes").get_cursor {}
+					},
 					fzf = {
 						fuzzy = true,
 						override_generic_sorter = true,
@@ -66,6 +70,7 @@ return {
 			}
 			require 'telescope'.setup(opts)
 			require 'telescope'.load_extension 'fzf'
+			require 'telescope'.load_extension 'ui-select'
 
 			batchMap(ts_mappings, leaderNmap)
 		end,
@@ -76,6 +81,9 @@ return {
 		cond = function()
 			return vim.fn.executable 'make' == 1
 		end,
+	},
+	{
+		'nvim-telescope/telescope-ui-select.nvim',
 	}
 
 }

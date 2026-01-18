@@ -1,9 +1,8 @@
-local cmd = require('utils').custom_user_command
-
 local colorColumnValue = nil
 local M = {}
+local create_user_command = vim.api.nvim_create_user_command
 
-cmd(
+create_user_command(
 	"ToggleColorColumn",
 	function()
 		if colorColumnValue then
@@ -13,16 +12,19 @@ cmd(
 		end
 
 		vim.cmd(("set colorcolumn=%s"):format(colorColumnValue or ""))
-	end
+	end,
+	{ desc = "Toggle Color Column" }
 )
 
 M.formattingEnabled = true
 
-cmd(
+create_user_command(
 	"ToggleFormat",
 	function()
 		M.formattingEnabled = not M.formattingEnabled
 		print("Formatting enabled:", M.formattingEnabled)
-	end
+	end,
+	{ desc = "Toggle Formatting" }
 )
+
 return M
