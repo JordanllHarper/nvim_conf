@@ -1,4 +1,3 @@
-local leader_nmap_cmd = require('utils').leader_nmap_cmd
 return {
   -- LSP Configuration & Plugins
   {

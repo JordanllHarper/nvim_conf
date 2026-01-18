@@ -1,4 +1,4 @@
-require 'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter'.setup {
   sync_install          = true,
   ignore_install        = { 'dart' },
   modules               = {},

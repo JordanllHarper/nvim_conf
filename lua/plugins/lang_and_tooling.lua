@@ -25,7 +25,6 @@ return {
             opts = {},
         }
     },
-
     { 'nanotee/zoxide.vim' },
 
     {
@@ -44,10 +43,6 @@ return {
         end
     },
     {
-        "michaelb/sniprun",
-        build = "sh install.sh"
-    },
-    {
         "ray-x/go.nvim",
         dependencies = { -- optional packages
             "ray-x/guihua.lua",
@@ -58,21 +53,6 @@ return {
         event = { "CmdlineEnter" },
         ft = { "go", 'gomod' },
         build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-    },
-    {
-        "luckasRanarison/tailwind-tools.nvim",
-        name = "tailwind-tools",
-        build = ":UpdateRemotePlugins",
-        dependencies = {
-            "nvim-treesitter/nvim-treesitter",
-            "nvim-telescope/telescope.nvim", -- optional
-            "neovim/nvim-lspconfig",         -- optional
-        },
-        opts = {
-            document_color = {
-                enabled = false,
-            }
-        } -- your configuration
     },
     {
         "vinnymeller/swagger-preview.nvim",

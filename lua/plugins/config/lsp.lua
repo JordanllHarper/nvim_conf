@@ -2,8 +2,6 @@ vim.diagnostic.config({
     severity_sort = true,
 })
 
-vim.lsp.inlay_hint.enable(true)
-
 vim.lsp.config('*', {
     capabilities = require("blink-cmp").get_lsp_capabilities()
 })
