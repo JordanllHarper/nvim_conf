@@ -13,11 +13,10 @@ map({ "n", "v" }, "<Space>", "<Nop>")
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-require("vim-options")
-require("custom.filetypes")
-require("custom.autocommands")
-require("custom.commands")
-require("keymaps")
+require "options"
+require "autocommands"
+require "commands"
+require "keymaps"
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -56,6 +55,8 @@ require("lazy").setup {
   { import = "plugins" },
   { import = "themes" },
 }
+
+require 'lsp'.setup_servers()
 
 vim.cmd([[colorscheme vague]])
 leader_nmap("ln", "<Cmd>Lazy<CR>", "[l]azy [n]vim")

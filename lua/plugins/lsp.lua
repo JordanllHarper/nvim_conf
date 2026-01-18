@@ -5,8 +5,5 @@ return {
     dependencies = {
       { 'j-hui/fidget.nvim', opts = {} },
     },
-    config = function()
-      require 'plugins.config.lsp'
-    end,
   },
 }

@@ -35,6 +35,6 @@ nvim_create_autocmd('BufLeave', {
 nvim_create_autocmd('LspAttach', {
 	callback = function(event)
 		local buf = event.buf
-		require('lsp-attach')(_, buf)
+		require('lsp').on_attach(_, buf)
 	end
 })

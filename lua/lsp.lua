@@ -1,10 +1,76 @@
-local cmd = require("utils").custom_buf_user_command
-local batchMap = require('utils').batch_map
-local ts = require("telescope.builtin")
-local actions_preview = require 'actions-preview'
+local cmd             = require("utils").custom_buf_user_command
+local batchMap        = require('utils').batch_map
+local ts              = require("telescope.builtin")
 
-local set = vim.keymap.set
-local del = vim.keymap.del
+local set             = vim.keymap.set
+local del             = vim.keymap.del
+
+local M               = {}
+
+M.setup_servers       = function()
+	vim.diagnostic.config({
+		severity_sort = true,
+	})
+
+	vim.lsp.config('*', {
+		capabilities = require("blink-cmp").get_lsp_capabilities()
+	})
+
+	---@type table<string | table<string, vim.lsp.Config>>
+	local global_servers = {
+		{
+			"csharp_ls",
+			{
+				settings = {
+					csharp = {
+						applyFormattingOptions = true
+					}
+				}
+			}
+		},
+		{
+			"bicep",
+			{
+				cmd = { "dotnet", "C:/tools/bicep-langserver/Bicep.LangServer.dll" }
+			}
+		},
+		"lemminx",
+		"lua_ls",
+		"bashls",
+		"gopls",
+		"ruby_lsp",
+		"pyright",
+		"ocamllsp",
+		"rust-analyzer",
+		"ts_ls",
+		"phpactor",
+		"svelte",
+		{
+			"clangd",
+			---@type vim.lsp.Config
+			{
+				cmd = {
+					"clangd",
+					"--offset-encoding=utf-16",
+					"--background-index",
+					"--clang-tidy",
+					"--log=verbose",
+				},
+			}
+		}
+	}
+
+	for _, server in ipairs(global_servers) do
+		local serverName = server
+		if type(server) == "table" then
+			serverName = server[1]
+			local configuration = server[2]
+			vim.lsp.config[serverName] = configuration
+		end
+
+		vim.lsp.enable(serverName)
+	end
+end
 
 ---Configures the lsp keymaps
 ---@param bufnr number
@@ -34,7 +100,7 @@ local function configure_lsp(bufnr)
 		{ "k",  function() lspbuf.signature_help { border = "single" } end, "Signature [H]elp" },
 		{ "rn", lspbuf.rename,                                              "[r]e[n]ame" },
 		-- Code actions
-		{ "c",  actions_preview.code_actions,                               "[c]ode action" },
+		-- { "c",  actions_preview.code_actions,                               "[c]ode action" },
 		-- Hints
 		{ "Lt", "<Cmd>ToggleHints<CR>",                                     "[T]oggle hints" },
 	}
@@ -110,8 +176,10 @@ local function delete_defaults()
 	bufdel("i", "<C-S>")
 end
 
-return function(_, bufnr)
+M.on_attach = function(_, bufnr)
 	delete_defaults()
 	configure_lsp(bufnr)
 	configure_diagnostic(bufnr)
 end
+
+return M
