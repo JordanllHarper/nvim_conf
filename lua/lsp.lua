@@ -19,12 +19,21 @@ M.setup_servers = function()
     ---@type table<string | table<string, vim.lsp.Config>>
     local global_servers = {
         {
+            "csharp_ls",
+            {
+                settings = {
+                    csharp = {
+                        applyFormattingOptions = true
+                    }
+                }
+            }
+        },
+        {
             "bicep",
             {
                 cmd = { "dotnet", "C:/tools/bicep-langserver/Bicep.LangServer.dll" }
             }
         },
-        "csharp_ls",
         "lemminx",
         "lua_ls",
         "bashls",
