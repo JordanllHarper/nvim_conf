@@ -32,14 +32,14 @@ return {
             vim.keymap.set("n", motion, f, { desc = desc })
         end
 
-        set("leader>Frl", cmd.reload, "[F]lutter [r]e[l]oad")
-        set("leader>Frs", cmd.restart, "[F]lutter [r]e[s]tart")
-        set("leader>Fs", cmd.run, "[F]lutter [s]tart")
-        set("leader>Fq", cmd.quit, "[F]lutter [q]uit")
-        set("leader>Fe", cmd.reload, "[F]lutter [e]mulators")
-        set("leader>Fc", log.clear, "[F]lutter [c]lear")
-        set("leader>Fl", log.toggle, "[F]lutter toggle [l]og")
-        set("leader>FL", lsp.restart, "[F]lutter restart [L]sp")
+        set("<leader>Frl", cmd.reload, "[F]lutter [r]e[l]oad")
+        set("<leader>Frs", cmd.restart, "[F]lutter [r]e[s]tart")
+        set("<leader>Fs", cmd.run, "[F]lutter [s]tart")
+        set("<leader>Fq", cmd.quit, "[F]lutter [q]uit")
+        set("<leader>Fe", cmd.reload, "[F]lutter [e]mulators")
+        set("<leader>Fc", log.clear, "[F]lutter [c]lear")
+        set("<leader>Fl", log.toggle, "[F]lutter toggle [l]og")
+        set("<leader>FL", lsp.restart, "[F]lutter restart [L]sp")
 
         flutter_tools.setup(opts)
         telescope.load_extension("flutter")
