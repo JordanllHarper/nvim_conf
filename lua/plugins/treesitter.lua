@@ -6,47 +6,27 @@ return {
         },
         build = ':TSUpdate',
         lazy = false,
+        branch = "main",
         config = function(_, opts)
-            require 'nvim-treesitter.configs'.setup {
-                sync_install          = true,
-                ignore_install        = { 'dart' },
-                ensure_installed      = {
-                    'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash'
-                },
-                highlight             = { enable = true },
-                indent                = { enable = true },
-                incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = '<space>.',
-                        node_incremental = '<space>.',
-                        scope_incremental = '<space>;.',
-                        node_decremental = '<space>,',
-                    },
-                },
-            }
+            require 'nvim-treesitter'.setup(opts)
+            require 'nvim-treesitter'.install({
+                'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash'
+            })
         end,
     },
     {
         dependencies = { 'nvim-treesitter' },
         'nvim-treesitter/nvim-treesitter-textobjects',
         branch = "main",
-        config = function()
-            require 'nvim-treesitter.configs'.setup {
-                textobjects = {
-                    select = {
-                        enable = true,
-                        lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-                    },
-                    move = {
-                        enable = true,
-                        set_jumps = true, -- whether to set jumps in the jumplist
-                    },
-                    swap = {
-                        enable = true,
-                    },
+        opts = {
+            textobjects = {
+                select = {
+                    lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
                 },
-            }
+            },
+        },
+        config = function(_, opts)
+            require 'nvim-treesitter-textobjects'.setup(opts)
             local set_select = function(movement, to)
                 local select = require "nvim-treesitter-textobjects.select"
                 vim.keymap.set({ "x", "o" }, movement, function()
